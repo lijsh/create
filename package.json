@@ -1,0 +1,15 @@
+{
+  "name": "create",
+  "version": "0.1.0",
+  "main": "index.js",
+  "author": "lijsh",
+  "license": "MIT",
+  "dependencies": {},
+  "scripts": {
+    "dev": "yarn poi --serve"
+  },
+  "devDependencies": {
+    "jest": "^24.8.0",
+    "poi": "^12.6.10"
+  }
+}
