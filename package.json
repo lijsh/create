@@ -9,7 +9,6 @@
     "dev": "yarn poi --serve"
   },
   "devDependencies": {
-    "jest": "^24.8.0",
-    "poi": "^12.6.10"
+    "poi": "^12.7.0"
   }
 }
