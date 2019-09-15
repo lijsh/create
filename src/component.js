@@ -16,11 +16,12 @@ export class Component {
       instance._$dom._$instance = instance
       instance._$dom._$key = props.key
       instance.componentDidMount()
+      return instance._$dom
     } else {
       return render(type(props), container)
     }
   }
-  
+
   static reconcile(dom, element, parent=dom.parentNode) {
     const props = Object.assign({}, element.props)
     if (dom._$instance && dom._$instance.constructor == element.type) {
@@ -30,7 +31,7 @@ export class Component {
     } else if (Component.isPrototypeOf(element.type)) {
         const ndom = Component.render(element, parent);
         return parent ? (parent.replaceChild(ndom, dom) && ndom) : (ndom);
-    } else if (!Component.isPrototypeOf(element.type)) {
+    } else {
         return patch(dom, element.type(props), parent);
     }
   }

@@ -1,4 +1,3 @@
-import { isNil, isElement } from "./utils";
 import { Component } from "./component";
 import { render, setAttribute } from "./render";
 
