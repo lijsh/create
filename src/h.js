@@ -1,13 +1,10 @@
-import { isNil } from "./utils";
-
-export function createElement(type, data, ...args) {
-  const props = isNil(data) ? {} : data
-  const children = args.length > 0 ? [].concat(...args) : []
+export function createElement(type, props, ...children) {
+  if (props === null) props = {}
   return {
     type,
     props: {
       ...props,
-      children: children.filter(c => !isNil(c))
+      children
     }
   }
 }
