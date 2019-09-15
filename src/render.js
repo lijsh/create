@@ -1,5 +1,6 @@
 import { Component } from './component'
 import { isPrimitive } from './utils'
+import { updateProperties } from './updateProperties'
 
 export function render(element, container) {
   const mount = container ? (el => container.appendChild(el)) : (el => el)
@@ -16,7 +17,7 @@ export function render(element, container) {
       }
       for (const prop in props) {
         if (prop !== 'children') {
-          setAttribute(dom, prop, props[prop])
+          updateProperties(dom, prop, props[prop])
         }
       }
       return dom
@@ -25,23 +26,3 @@ export function render(element, container) {
     throw new Error( `Invalid Element: ${element}.`)
   }
 }
-
-export const setAttribute = (dom, key, value) => {
-  if (typeof value == 'function' && key.startsWith('on')) {
-    const eventType = key.slice(2).toLowerCase();
-    dom._$handlers = dom._$handlers || {};
-    dom.removeEventListener(eventType, dom._$handlers[eventType]);
-    dom._$handlers[eventType] = value;
-    dom.addEventListener(eventType, dom._$handlers[eventType]);
-  } else if (key == 'checked' || key == 'value' || key == 'className') {
-    dom[key] = value;
-  } else if (key == 'style' && typeof value == 'object') {
-    Object.assign(dom.style, value);
-  } else if (key == 'ref' && typeof value == 'function') {
-    value(dom);
-  } else if (key == 'key') {
-    dom._$key = value;
-  } else if (typeof value != 'object' && typeof value != 'function') {
-    dom.setAttribute(key, value);
-  }
-};

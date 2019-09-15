@@ -25,7 +25,6 @@ export class Component {
   static reconcile(dom, element, parent=dom.parentNode) {
     const props = Object.assign({}, element.props)
     if (dom._$instance && dom._$instance.constructor == element.type) {
-      dom._$instance.componentWillReceiveProps(props);
       dom._$instance.props = props;
       return patch(dom, dom._$instance.render(), parent);
     } else if (Component.isPrototypeOf(element.type)) {
@@ -53,18 +52,6 @@ export class Component {
 
   componentWillMount() {}
   componentDidMount() {}
-  componentWillReceiveProps(nextProps) {
-    return undefined;
-  }
-
-  componentWillUpdate(nextProps, nextState) {
-      return undefined;
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-      return undefined;
-  }
-
 
   componentWillUnmount() {
       return undefined;
