@@ -1,4 +1,4 @@
-import { reconcile } from "./reconcile";
+import { reconcile } from './reconcile'
 import { render } from './render'
 
 export class Component {
@@ -25,13 +25,13 @@ export class Component {
   static reconcile(dom, element, parent=dom.parentNode) {
     const props = Object.assign({}, element.props)
     if (dom._$instance && dom._$instance.constructor == element.type) {
-      dom._$instance.props = props;
-      return patch(dom, dom._$instance.render(), parent);
+      dom._$instance.props = props
+      return patch(dom, dom._$instance.render(), parent)
     } else if (Component.isPrototypeOf(element.type)) {
-        const ndom = Component.render(element, parent);
-        return parent ? (parent.replaceChild(ndom, dom) && ndom) : (ndom);
+        const ndom = Component.render(element, parent)
+        return parent ? (parent.replaceChild(ndom, dom) && ndom) : (ndom)
     } else {
-        return patch(dom, element.type(props), parent);
+        return patch(dom, element.type(props), parent)
     }
   }
 
@@ -47,13 +47,13 @@ export class Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return nextProps != this.props || nextState != this.state;
+    return nextProps != this.props || nextState != this.state
   }
 
   componentWillMount() {}
   componentDidMount() {}
 
   componentWillUnmount() {
-      return undefined;
+      return undefined
   }
 }
