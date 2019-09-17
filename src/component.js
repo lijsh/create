@@ -1,4 +1,4 @@
-import { reconcile } from './reconcile'
+import { patch } from './patch'
 import { render } from './render'
 
 export class Component {
@@ -6,29 +6,33 @@ export class Component {
     this.props = props
     this.state = {}
   }
+
   static render(element, container) {
     const props = Object.assign({}, element.props)
-    const { type } = element
-    const instance = new type(props)
-    instance._$dom = render(instance.render(), container)
+    const instance = new element.type(props)
+    const instanceElement = instance.render()
+    const dom = render(instanceElement, container)
+    instance._$dom = dom
     instance._$dom._$instance = instance
-    return instance._$dom
+    return dom
   }
 
-  static reconcile(dom, element, parent=dom.parentNode) {
+  static patch(dom, element, parent = dom.parentNode) {
     const props = Object.assign({}, element.props)
-    if (dom._$instance && dom._$instance.constructor == element.type) {
-      dom._$instance.props = props
-      return patch(dom, dom._$instance.render(), parent)
+    const instance = dom._$instance
+    if (instance && instance.constructor === element.type) {
+      instance.props = props
+      return patch(dom, instance.render(), parent)
     } else {
-        const ndom = Component.render(element, parent)
-        return parent ? (parent.replaceChild(ndom, dom) && ndom) : (ndom)
+      const newDom = Component.render(element, parent)
+      if (parent) parent.replaceChild(newDom, dom)
+      return newDom
     }
   }
 
   setState(partialState) {
     this.state = Object.assign({}, this.state, partialState)
     const newElem = this.render()
-    reconcile(this._$dom, newElem)
+    patch(this._$dom, newElem)
   }
 }

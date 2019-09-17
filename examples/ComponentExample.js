@@ -1,5 +1,5 @@
 
-import { h, Component } from './src'
+import { h, Component } from '../src'
 /** @jsx h */
 export const stories = [
   { name: "React", url: "https://zh-hans.reactjs.org/" },
@@ -7,7 +7,7 @@ export const stories = [
   { name: "Angular", url: "https://angular.io/" },
 ];
 
-export class ReconcileExample extends Component {
+export class ComponentExample extends Component {
   render() {
     return (
       <div>

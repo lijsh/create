@@ -1,7 +1,12 @@
-import { h, render, Component } from './src'
+import { h, render } from './src'
 import './index.css'
-import { ReconcileExample, stories } from './ReconcileExample'
+import { ComponentExample, stories } from './examples/ComponentExample'
+import { renderExample } from './examples/RenderExample'
+import './examples/createElementExample'
+import { Todo } from './examples/anotherCompExample'
 /** @jsx h */
+const root = document.getElementById('app')
 
-
-render(<ReconcileExample stories={stories} />, document.getElementById('app'))
+// render(renderExample, root)
+// render(<ComponentExample stories={stories} />, root)
+render(<Todo />, root)
