@@ -7,6 +7,9 @@ import { Todo } from './examples/anotherCompExample'
 /** @jsx h */
 const root = document.getElementById('app')
 
+// render demo
 // render(renderExample, root)
+
+// component demo
 // render(<ComponentExample stories={stories} />, root)
-render(<Todo />, root)
+// render(<Todo />, root)

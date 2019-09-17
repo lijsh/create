@@ -37,7 +37,7 @@ class Story extends Component {
     const { likes } = this.state;
     return (
       <li>
-        <button onClick={e => this.like()}>{likes}<b>❤️</b></button>
+        <button className="likes" onClick={e => this.like()}>{likes}<b>❤️</b></button>
         <a href={url}>{name}</a>
       </li>
     );
